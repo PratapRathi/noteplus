@@ -42,7 +42,19 @@
     border-bottom: 1px solid #DCDDDF;
     cursor: pointer;
 }
-.sidebar-logo a{
-    text-decoration: none;
-    color: black;
+
+.sidebar-logo img {
+    height: 60px;
 }
+
+@media (min-width: 1300px){
+.side-menu-close {
+    display: none;
+}
+}
+@media (max-width: 1300px){
+.side-menu-close {
+    display: block;
+}
+}
+
