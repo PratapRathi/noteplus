@@ -1,24 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import Sidemenu from './components/Sidemenu';
+import Loader from './components/Loader';
 
 function App() {
+
+  let loader = false // To be updated 
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    {loader && <Loader/>}
+    <div className='d-flex'>
+      <Sidemenu/>
+      <div className="main"></div>
     </div>
+    </>
   );
 }
 
