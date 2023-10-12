@@ -48,7 +48,7 @@ const Sidemenu = () => {
       <div className="search-bar mb-3">
         <form action="#" className="search-box">
           <i className="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" placeholder="Search" className="search-input" />
+          <input type="text" placeholder="Search" className="search-input input-text" />
         </form>
       </div>
       <div className="btn add-note mb-3 pr-5">

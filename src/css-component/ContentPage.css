@@ -102,3 +102,8 @@
 .note-content{
     margin-bottom: 30px;
 }
+
+.input-text:focus-visible{
+  outline: none !important;
+  border: none !important;
+}

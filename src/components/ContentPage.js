@@ -37,11 +37,11 @@ const ContentPage = () => {
                         <div className="card card-container">
                             <h3 className='mb-3'>Your Saved Notes</h3>
                             <div className="p-2 body-bg mb-4">
-                                <form className="add-notes">
+                                <form className="add-notes input-text">
                                     <a className="search-link" href="/">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                        <i className="fa-solid fa-magnifying-glass"></i>
                                     </a>
-                                    <input type="text" className="text search-content" placeholder="6 Notes" value="" />
+                                    <input type="text" className="text search-content input-text" placeholder="Search Notes" value="" />
                                 </form>
                             </div>
                             <div className="row note-content">

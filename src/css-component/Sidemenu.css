@@ -131,3 +131,8 @@
     width: 100%;
     height: 100%;
 }
+
+.input-text:focus-visible{
+    outline: none !important;
+    border: none !important;
+  }
