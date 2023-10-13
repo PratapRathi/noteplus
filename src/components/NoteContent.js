@@ -1,10 +1,17 @@
 import React from 'react'
 import "../css-component/NoteContent.css"
 
-const NoteContent = () => {
-    return (
+const NoteContent = (props) => {
+    const { note, color } = props;
+    const date = new Date(note.date);
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const currentDate = date.getUTCDate();
+    const month = date.toLocaleString('default',{month:'short'})
+    const year = date.getUTCFullYear();
 
-        <div className="col-lg-4 col-md-6">
+    return (
+        <div className="col-lg-4 col-md-6 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div className="card-head mb-3 dropdown dropstart">
@@ -20,11 +27,12 @@ const NoteContent = () => {
                             <div className="dropdown-item">Delete</div>
                         </div>
                     </div>
-                    <h4 class="card-title">Card title</h4>
-                    <span className="card-text card-time"><i class="fa-regular fa-clock me-2" style={{ "color": "#87baf5" }}></i> 03:00 Am</span>
-                    <p class="card-text mt-3 mb-3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <div className="card-date d-flex justify-content-end">
-                        <span className='card-text card-date'><i class="fa-regular fa-calendar-days me-2" style={{ "color": "#87baf5" }}></i> 12 Oct 2023</span>
+                    <h4 class="card-title">{note.title}</h4>
+                    <span className="card-text card-time"><i class="fa-regular fa-clock me-2" style={{ "color": "#87baf5" }}></i> {`${hours%12}:${minutes} ${hours>12?'Pm':'Am'}`}</span>
+                    <p class="card-text mt-3 mb-3">{note.description}</p>
+                    <div className="card-date d-flex justify-content-end position-relative">
+                        <span className='card-text card-date'><i class="fa-regular fa-calendar-days me-2" style={{ "color": "#87baf5" }}></i> {`${currentDate} ${month} ${year}`}</span>
+                        <span class="position-absolute translate-middle badge rounded-pill" style={{backgroundColor:color}}>{note.tag}</span>
                     </div>
                 </div>
                 <div className="card-line"></div>

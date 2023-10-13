@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect  } from 'react'
 import "../css-component/ContentPage.css"
 import NoteContent from './NoteContent'
+import noteContext from '../context/notes/NoteContext'
 
 const ContentPage = () => {
+    const colors = ["#87baf5","#aa87f5","#f0864a","#f674ad","#1f1c2f","#8ac3a3"]
+    const context = useContext(noteContext);
+    const {notes, getNotes} = context;
+    useEffect(()=>{
+        getNotes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
+
+
     return (
         <div className="content-page">
             <div className="container-fluid">
@@ -45,7 +56,9 @@ const ContentPage = () => {
                                 </form>
                             </div>
                             <div className="row note-content">
-                                <NoteContent/>
+                                {notes.map((note,index)=>{
+                                    return <NoteContent key={notes._id} note={note} color={colors[index%6]}/>
+                                })}       
                             </div>
                         </div>
                     </div>

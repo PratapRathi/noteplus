@@ -2,6 +2,7 @@ import './App.css';
 import ContentPage from './components/ContentPage';
 import Loader from './components/Loader';
 import Sidemenu from './components/Sidemenu';
+import NoteState from './context/notes/NoteState';
 
 function App() {
 
@@ -9,11 +10,11 @@ function App() {
 
   return (
     <>
-      {loader && <Loader />}
-      <div className='wrapper'>
+      <NoteState>
+        {loader && <Loader />}
         <Sidemenu />
-        <ContentPage/>
-      </div>
+        <ContentPage />
+      </NoteState>
     </>
   );
 }

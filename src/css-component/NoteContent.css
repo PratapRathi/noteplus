@@ -64,3 +64,8 @@
     border-radius: 10px;
     overflow: hidden;
 }
+
+.badge{
+    left: 8.5%;
+    top: 55%;
+}
