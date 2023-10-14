@@ -1,0 +1,11 @@
+.offcanvas-index{
+    height: 35px;
+    width: 35px;
+    line-height: 34px;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid;
+    color: #131313;
+}

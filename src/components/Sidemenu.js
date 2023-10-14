@@ -1,12 +1,17 @@
-import React, {useRef} from 'react'
+import React, {useContext, useEffect, useRef} from 'react'
 import '../css-component/Sidemenu.css'
+import noteContext from '../context/notes/NoteContext';
+import Offcanvas from './Offcanvas';
 
 const Sidemenu = () => {
-  let name = "Pratap Rathi";
-  let gender = "male";
-
+  const context = useContext(noteContext)
+  const {notes, getNotes, getBinNotes, user, getUser} = context;
   const ref = useRef();
 
+  useEffect(()=>{
+    getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   function sideMenuClose(e){
     e.preventDefault();
@@ -26,8 +31,8 @@ const Sidemenu = () => {
       </div>
       {/* {Personal Dropdown Menu} */}
       <div className="sidebar-dropdown dropdown-toggle dropdown d-flex align-items-center justify-content-between" data-bs-toggle="dropdown">
-        <img src={require(`../img/${gender}.jpg`)} alt="avatar" className=".me-3" />
-        <h6 style={{ color: "#1f1c2f" }}>{name}</h6>
+        <img src={require(`../img/${user.gender?user.gender:"male"}.jpg`)} alt="avatar" className=".me-3" />
+        <h6 style={{ color: "#1f1c2f" }}>{user.name}</h6>
         <div className="dropdown-menu">
           <a href="/" className="dropdown-item mb-2 text-decoration-none">
             <i className="fa-solid fa-user me-3"></i>
@@ -59,7 +64,7 @@ const Sidemenu = () => {
       </div>
       <nav className="sidebar-nav">
         <ul>
-          <li className="sidebar-li my-4">
+          <li className="sidebar-li my-4" onClick={getNotes}>
             <i>
               <svg className="svg-icon me-3" id="iq-main-1" width="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" style={{ "strokeDasharray": "108, 128", "strokeDashoffset": "0" }}></path>
@@ -75,7 +80,7 @@ const Sidemenu = () => {
             </i>
             <span>Reminder</span>
           </li>
-          <li className="sidebar-li my-4">
+          <li className="sidebar-li my-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
             <i>
               <svg width="20" className="svg-icon me-3" id="iq-main-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" style={{"strokeDasharray": "56, 76", "strokeDashoffset": "0"}}></path>
@@ -83,7 +88,7 @@ const Sidemenu = () => {
             </i>
             <span>Tags</span>
           </li>
-          <li className="sidebar-li my-4">
+          <li className="sidebar-li my-4" onClick={getBinNotes}>
             <i>
               <svg width="20" className="svg-icon me-3" id="iq-main-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" style={{"strokeDasharray": "80, 100", "strokeDashoffset": "0"}}></path>
@@ -96,6 +101,7 @@ const Sidemenu = () => {
       <div className="side-image d-flex">
         <img src={require("../img/side-bkg.png")} alt="" />
       </div>
+      <Offcanvas notes={notes}/>
     </div>
   )
 }

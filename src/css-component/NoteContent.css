@@ -16,7 +16,6 @@
 
 .card-icon-box{
     border: 1px solid;
-    border-color: #87baf5;
     position: relative;
     height: 45px;
     width: 45px;
@@ -25,7 +24,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #87baf5;
 }
 
 .card-menu{
@@ -45,10 +43,6 @@
     font-family: "Roboto", sans-serif;
 }
 
-.card-time{
-    color: #87baf5;
-}
-
 .card-date{
     font-weight: 500;
     color: #131313;
@@ -59,8 +53,6 @@
     height: 0%;
     bottom: 0px;
     border: 2px solid;
-    border-color: #87baf5;
-    background-color: #87baf5;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -68,4 +60,11 @@
 .badge{
     left: 8.5%;
     top: 55%;
+}
+
+.badge,.card,.fa-calendar-days,.card-date,.card-head{
+    transition: all 0.2s linear !important;
+}
+.fa-ellipsis,.dropdown-item{
+    cursor: pointer;
 }
