@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import noteContext from '../context/notes/NoteContext'
 
-const loader = () => {
+const Loader = () => {
+  const context = useContext(noteContext);
+  const { loader } = context;
+
   return (
-    <div id='loader'>
-      <div id="loading-center">
-        
-      </div>
-    </div>
+    <>
+      {loader && (<div id='loader'>
+        <div id="loading-center">
+
+        </div>
+      </div>)}
+    </>
   )
 }
 
-export default loader
+export default Loader

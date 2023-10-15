@@ -12,11 +12,11 @@ const NoteContent = (props) => {
 
     const { note, color } = props;
     const date = new Date(note.date);
-    const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-    const currentDate = date.getUTCDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const currentDate = date.getDate();
     const month = date.toLocaleString('default', { month: 'short' })
-    const year = date.getUTCFullYear();
+    const year = date.getFullYear();
 
     const ref = useRef(); const timeRef = useRef(); const dateRef = useRef(); const calenderRef = useRef(); const clockRef = useRef();
     const titleRef = useRef(); const paraRef = useRef(); const logoRef = useRef(); const headerRef = useRef(); const dropRef = useRef();
@@ -41,7 +41,7 @@ const NoteContent = (props) => {
 
     return (
         <div className="col-lg-4 col-md-6 mb-4">
-            <div className="card cardStyle" ref={ref} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+            <div className="card cardStyle note-card" ref={ref} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
                 <div className="card-body">
                     <div className="card-head mb-3 dropdown dropstart" ref={headerRef}>
                         <div className="card-icon-box" style={{ color: color, borderColor: color }} ref={logoRef}>
@@ -56,15 +56,6 @@ const NoteContent = (props) => {
                                 <Route exact path="/bin" element={<BinDropdown restoreNote={restoreNote} finalDelete={finalDelete} note={note} />} />
                             </Routes>
                         </div>
-                        
-                        {/* <BinDropdown restoreNote={restoreNote} finalDelete={finalDelete} note={note}/> */}
-
-                        {/* {<div className="dropdown-menu card-menu">
-                            <div className="dropdown-item">View</div>
-                            <div className="dropdown-item">Edit</div>
-                            <div className="dropdown-item" onClick={()=>{deleteNote(note._id)}}>Delete</div>
-                        </div>} */}
-
                     </div>
                     <h4 className="card-title" ref={titleRef}>{note.title}</h4>
                     <span className="card-text card-time" style={{ color: color }} ref={timeRef}><i className="fa-regular fa-clock me-2" style={{ color: color }} ref={clockRef}></i> {`${hours % 12}:${minutes < 10 ? '0' + String(minutes) : minutes} ${hours > 12 ? 'Pm' : 'Am'}`}</span>

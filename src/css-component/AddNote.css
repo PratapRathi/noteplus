@@ -1,5 +1,12 @@
 .add-note-modal{
     margin-bottom: 30px;
+    transition: all  0.3s linear !important;
+
+    color: #131313 !important;
+}
+
+.show{
+    transition: all  0.3s linear !important;
 }
 
 .add-note-heading{
@@ -10,6 +17,18 @@
     font-size: 1.728em;
 }
 
+.add-title, .add-description, .add-tag{
+    color: #131313;
+}
+
+.tag-dropdown select{
+  padding: 10px 20px;
+  border-radius:5px;
+}
+
+.tag-dropdown select:focus{
+    outline:none;
+  }
 
   
   /* select{

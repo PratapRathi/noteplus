@@ -1,44 +1,63 @@
-import React from 'react'
+import React,{useContext, useState} from 'react'
 import '../css-component/AddNote.css'
+import noteContext from '../context/notes/NoteContext';
 
-const AddNoteModal = () => {
+const AddNoteModal = (props) => {
+    const[note,setNote] = useState({title:"", description:"", tag:""});
+    const context = useContext(noteContext)
+    const {addNote} = context;
+
+    const formSubmit= (e)=> {
+        e.preventDefault();
+        addNote(note.title,note.description,note.tag);
+        setNote({title:"", description:"", tag:""});
+        props.addNoteShow.current.classList.remove("show")
+    }
+
+    const onChange=(e)=>{
+        setNote({...note,[e.target.name]: e.target.value})
+    }
+
+
     return (
         <div className="col-md-12 " >
-            <div className="collapse card card-block card-stretch ps-2 add-note-modal show" id="collapseMenu" >
+            <div className="collapse card card-block card-stretch ps-2 add-note-modal" id="collapseMenu" ref={props.addNoteShow}>
                 <div className="row card-body write-card container-fluid collapse-fluid">
                     <div className="col-md-12 col-lg-12 p-0">
                         <h3 className='add-note-heading'>Add Note</h3>
                         <hr />
 
-                        <div class="row g-3 align-items-center mb-3">
-                            <div class="col-auto">
-                                <label for="inputPassword6" class="col-form-label">Title</label>
+                        <div className="row g-3 align-items-center mb-3">
+                            <div className="col-auto">
+                                <label htmlFor="title" className="col-form-label add-title">Title</label>
                             </div>
-                            <div class="col-md-5">
-                                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline" />
+                            <div className="col-md-5">
+                                <input type="text" name='title' id="title" className="form-control" aria-describedby="passwordHelpInline" value={note.title} onChange={onChange}/>
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <div className="mb-3">
+                            <label htmlFor="description" className="form-label add-description">Description</label>
+                            <textarea className="form-control" name='description' id="description" rows="3" value={note.description} onChange={onChange}></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="language" className='me-4'>Tag:</label>
-                            <select name="language" id="language">
-                                <option value="javascript">JavaScript</option>
-                                <option value="python">Python</option>
-                                <option value="c++" disabled>C++</option>
-                                <option value="java" selected>Java</option>
+                        <div className="mb-3 tag-dropdown">
+                            <label htmlFor="tag" className='me-4 add-tag'>Tag:</label>
+                            <select name="tag" id="tag" value={note.tag} onChange={onChange}>
+                                <option value="General">General</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Work" >Work</option>
+                                <option value="Important" >Important</option>
+                                <option value="To-Do" >To-Do</option>
+                                <option value="Finance" >Finance</option>
+                                <option value="Health" >Health</option>
                             </select>
                         </div>
 
 
-
                         <div className="col-lg-12 p-0 d-flex justify-content-end">
-                            <button className="btn btn-outline-dark" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Close</button>
-                            <button className="btn btn-dark ms-3" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Save</button>
+                            <button className="btn btn-outline-dark" onClick={()=>{props.addNoteShow.current.classList.remove("show")}}>Close</button>
+                            <button type="submit" className="btn btn-dark ms-3" onClick={(e)=>{formSubmit(e)}}>Save</button>
                         </div>
                     </div>
                 </div>

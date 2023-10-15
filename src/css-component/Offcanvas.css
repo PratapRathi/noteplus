@@ -15,4 +15,5 @@
 
 .offcanvas{
     --bs-offcanvas-width: 300px;
+    --bs-offcanvas-zindex: 99999 !important;
 }

@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import "../css-component/ContentPage.css"
 import NoteContent from './NoteContent'
 import noteContext from '../context/notes/NoteContext'
 import AddNoteModal from './AddNoteModal'
 
 const ContentPage = () => {
+    const addNoteShow = useRef(null);
     const colors = ["#87baf5", "#aa87f5", "#f0864a", "#f674ad", "#302c48", "#8ac3a3"]
     const context = useContext(noteContext);
     const { notes, getNotes, heading } = context;
@@ -21,7 +22,7 @@ const ContentPage = () => {
                 <div className="content-header d-flex align-items-center justify-content-center">
                     <div className="card topnav-left card-block">
                         <div className="write-card">
-                            <div className="add-note-cursor d-flex align-items-center justify-content-start">
+                            <div className="add-note-cursor d-flex align-items-center justify-content-start" onClick={()=>{addNoteShow.current.classList.add("show") }}>
                                 <i className="fa-solid fa-pencil me-3" style={{ "color": "#848486" }}></i>
                                 Write Your Note
                             </div>
@@ -45,7 +46,7 @@ const ContentPage = () => {
                     </div>
                 </div>
                 <div className="note-content row">
-                    <AddNoteModal />
+                    <AddNoteModal addNoteShow={addNoteShow}/>
                     <div className="col-lg-12">
                         <div className="card card-container">
                             <h3 className='mb-3'>{heading}</h3>
