@@ -1,0 +1,24 @@
+.add-note-modal{
+    margin-bottom: 30px;
+}
+
+.add-note-heading{
+    font-weight: 400;
+    margin: 0px;
+    line-height: 1.5;
+    color: #131313;
+    font-size: 1.728em;
+}
+
+
+  
+  /* select{
+    border:none;
+    padding: 10px 20px;
+    border-radius:5px;
+  } */
+  
+  
+  /* select:focus{
+    outline:none;
+  } */

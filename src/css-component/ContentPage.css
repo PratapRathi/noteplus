@@ -44,6 +44,10 @@
   color: #848486;
 }
 
+.add-note-cursor{
+  cursor: text;
+}
+
 .topnav-right {
   border-radius: 10px;
   margin-bottom: 30px;
