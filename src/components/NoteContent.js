@@ -1,11 +1,14 @@
-import React, {useContext, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import "../css-component/NoteContent.css"
 import noteContext from '../context/notes/NoteContext'
+import SavedDropdown from './SavedDropdown';
+import BinDropdown from './BinDropdown';
+import { Routes, Route } from "react-router-dom";
 // import styled from 'styled-components';
 
 const NoteContent = (props) => {
     const context = useContext(noteContext);
-    const { deleteNote } = context;
+    const { deleteNote, restoreNote, finalDelete } = context;
 
     const { note, color } = props;
     const date = new Date(note.date);
@@ -15,20 +18,20 @@ const NoteContent = (props) => {
     const month = date.toLocaleString('default', { month: 'short' })
     const year = date.getUTCFullYear();
 
-    const ref = useRef();  const timeRef = useRef();  const dateRef = useRef();  const calenderRef = useRef();  const clockRef = useRef();
-    const titleRef = useRef();  const paraRef = useRef();  const logoRef = useRef();  const headerRef = useRef();  const dropRef = useRef();
-    const enter = [timeRef,clockRef,calenderRef,titleRef,paraRef,logoRef,dropRef,dateRef];
-    const leave = [timeRef,clockRef,calenderRef,logoRef];
+    const ref = useRef(); const timeRef = useRef(); const dateRef = useRef(); const calenderRef = useRef(); const clockRef = useRef();
+    const titleRef = useRef(); const paraRef = useRef(); const logoRef = useRef(); const headerRef = useRef(); const dropRef = useRef();
+    const enter = [timeRef, clockRef, calenderRef, titleRef, paraRef, logoRef, dropRef, dateRef];
+    const leave = [timeRef, clockRef, calenderRef, logoRef];
     const mouseEnter = () => {
         ref.current.style.backgroundColor = color;
         headerRef.current.style.backgroundColor = color;
         logoRef.current.style.borderColor = "#FFFF";
-        enter.forEach((e)=>{e.current.style.color = "#FFFF"});
+        enter.forEach((e) => { e.current.style.color = "#FFFF" });
     }
     const mouseLeave = () => {
         ref.current.style.backgroundColor = "#FFFF";
         headerRef.current.style.backgroundColor = "#FFFF";
-        leave.forEach((e)=>{e.current.style.color = color});
+        leave.forEach((e) => { e.current.style.color = color });
         logoRef.current.style.borderColor = color;
         paraRef.current.style.color = "#848486";
         dropRef.current.style.color = "rgb(33,37,41)";
@@ -48,13 +51,23 @@ const NoteContent = (props) => {
                         </div>
                         <i className="fa-solid fa-ellipsis fa-lg" data-bs-toggle="dropdown" ref={dropRef}></i>
                         <div className="dropdown-menu card-menu">
+                            <Routes>
+                                <Route exact path="/" element={<SavedDropdown deleteNote={deleteNote} note={note} />} />
+                                <Route exact path="/bin" element={<BinDropdown restoreNote={restoreNote} finalDelete={finalDelete} note={note} />} />
+                            </Routes>
+                        </div>
+                        
+                        {/* <BinDropdown restoreNote={restoreNote} finalDelete={finalDelete} note={note}/> */}
+
+                        {/* {<div className="dropdown-menu card-menu">
                             <div className="dropdown-item">View</div>
                             <div className="dropdown-item">Edit</div>
                             <div className="dropdown-item" onClick={()=>{deleteNote(note._id)}}>Delete</div>
-                        </div>
+                        </div>} */}
+
                     </div>
                     <h4 className="card-title" ref={titleRef}>{note.title}</h4>
-                    <span className="card-text card-time" style={{ color: color }} ref={timeRef}><i className="fa-regular fa-clock me-2" style={{ color: color }} ref={clockRef}></i> {`${hours % 12}:${minutes} ${hours > 12 ? 'Pm' : 'Am'}`}</span>
+                    <span className="card-text card-time" style={{ color: color }} ref={timeRef}><i className="fa-regular fa-clock me-2" style={{ color: color }} ref={clockRef}></i> {`${hours % 12}:${minutes < 10 ? '0' + String(minutes) : minutes} ${hours > 12 ? 'Pm' : 'Am'}`}</span>
                     <p className="card-text mt-3 mb-3" ref={paraRef}>{note.description}</p>
                     <div className="card-date d-flex justify-content-end position-relative">
                         <span className='card-text card-date' ref={dateRef}><i className="fa-regular fa-calendar-days me-2" style={{ color: color }} ref={calenderRef}></i> {`${currentDate} ${month} ${year}`}</span>

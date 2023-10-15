@@ -85,9 +85,37 @@ const NoteState = (props) => {
     return json;
   }
 
+  // Restore a Deleted Note
+  const restoreNote = async (id) => {
+    // API call - Backend
+    const response = await fetch(`${host}/api/notes/restorenote/${id}`, {
+      method: "POST",
+      headers: {
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+      }
+    })
+    const json = await response.json();
+    setNotes(notes.filter((note)=>{return note._id !== id}))
+    return json;
+  }
+
+  // Permanently delete a Note 
+  const finalDelete = async (id) => {
+    // API call - Backend
+    const response = await fetch(`${host}/api/notes/permanentdeletenote/${id}`, {
+      method: "DELETE",
+      headers: {
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+      }
+    })
+    const json = await response.json();
+    setNotes(notes.filter((note)=>{return note._id !== id}))
+    return json;
+  }
 
   return (
-    <noteContext.Provider value={{ notes, loader, setLoader, getNotes, getBinNotes, getUser, user, heading,tags, getTagNote, deletedNote, deleteNote }}>
+    <noteContext.Provider value={{ notes, loader, setLoader, getNotes, getBinNotes, getUser, user, heading,tags, getTagNote, 
+    deletedNote, deleteNote, restoreNote, finalDelete  }}>
       {props.children}
     </noteContext.Provider>
   )

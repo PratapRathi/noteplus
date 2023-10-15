@@ -122,6 +122,11 @@
     text-transform: capitalize;
     cursor: pointer;
 }
+.link{
+    text-decoration: none;
+    color: #848486;
+}
+
 .side-image{
     width: 220px;
     height: 220px;

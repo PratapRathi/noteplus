@@ -3,6 +3,7 @@ import ContentPage from './components/ContentPage';
 import Loader from './components/Loader';
 import Sidemenu from './components/Sidemenu';
 import NoteState from './context/notes/NoteState';
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
 
@@ -11,9 +12,11 @@ function App() {
   return (
     <>
       <NoteState>
-        {loader && <Loader />}
-        <Sidemenu />
-        <ContentPage />
+        <Router>
+          {loader && <Loader />}
+          <Sidemenu />
+          <ContentPage />
+        </Router>
       </NoteState>
     </>
   );
