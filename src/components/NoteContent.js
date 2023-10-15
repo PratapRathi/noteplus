@@ -1,8 +1,12 @@
-import React, { useRef } from 'react'
+import React, {useContext, useRef } from 'react'
 import "../css-component/NoteContent.css"
+import noteContext from '../context/notes/NoteContext'
 // import styled from 'styled-components';
 
 const NoteContent = (props) => {
+    const context = useContext(noteContext);
+    const { deleteNote } = context;
+
     const { note, color } = props;
     const date = new Date(note.date);
     const hours = date.getUTCHours();
@@ -46,7 +50,7 @@ const NoteContent = (props) => {
                         <div className="dropdown-menu card-menu">
                             <div className="dropdown-item">View</div>
                             <div className="dropdown-item">Edit</div>
-                            <div className="dropdown-item">Delete</div>
+                            <div className="dropdown-item" onClick={()=>{deleteNote(note._id)}}>Delete</div>
                         </div>
                     </div>
                     <h4 className="card-title" ref={titleRef}>{note.title}</h4>

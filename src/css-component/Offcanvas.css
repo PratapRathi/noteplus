@@ -9,3 +9,10 @@
     border: 1px solid;
     color: #131313;
 }
+.offcanvas-li{
+    cursor: pointer;
+}
+
+.offcanvas{
+    --bs-offcanvas-width: 300px;
+}

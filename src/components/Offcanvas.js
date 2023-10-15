@@ -3,11 +3,16 @@ import '../css-component/Offcanvas.css'
 
 const Offcanvas = (props) => {
     let tag = new Set();
-    props.notes.forEach((e) => {
+    props.tags.forEach((e) => {
         tag.add(e.tag);
     })
     const tagArr = Array.from(tag);
     const colors = ["#87baf5", "#aa87f5", "#f0864a", "#f674ad", "#302c48", "#8ac3a3"]
+
+    const tagClick = (e)=> {
+        // console.log(String(e.target.textContent));
+        props.getTagNote(e.target.textContent)
+    }
 
     return (
         <>
@@ -22,7 +27,7 @@ const Offcanvas = (props) => {
                         <ul>
                             {tagArr.map((e, index) => {
                                 return (<div key={index}>
-                                    <li className="offcanvas-li my-3 d-flex align-item-center justify-content-start">
+                                    <li className="offcanvas-li my-3 d-flex align-item-center justify-content-start" onClick={(e)=>{tagClick(e)}}>
                                         <div className="me-4 offcanvas-index" style={{ borderColor: `${colors[index%6]}` }} >{index + 1}</div>
                                         <h5>{e}</h5>
                                     </li>

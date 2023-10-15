@@ -6,11 +6,12 @@ import noteContext from '../context/notes/NoteContext'
 const ContentPage = () => {
     const colors = ["#87baf5", "#aa87f5", "#f0864a", "#f674ad", "#302c48", "#8ac3a3"]
     const context = useContext(noteContext);
-    const { notes, getNotes } = context;
+    const { notes, getNotes, heading } = context;
     useEffect(() => {
         getNotes();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+    console.log()
 
 
     return (
@@ -45,7 +46,7 @@ const ContentPage = () => {
                     <div className="note-content row">
                         <div className="col-lg-12">
                             <div className="card card-container">
-                                <h3 className='mb-3'>Your Saved Notes</h3>
+                                <h3 className='mb-3'>{heading}</h3>
                                 <div className="p-2 body-bg mb-4">
                                     <form className="add-notes input-text">
                                         <a className="search-link" href="/">
