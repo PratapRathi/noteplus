@@ -1,20 +1,17 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect} from 'react'
 import "../css-component/ContentPage.css"
 import NoteContent from './NoteContent'
 import noteContext from '../context/notes/NoteContext'
 import AddNoteModal from './AddNoteModal'
 
 const ContentPage = () => {
-    const addNoteShow = useRef(null);
     const colors = ["#87baf5", "#aa87f5", "#f0864a", "#f674ad", "#302c48", "#8ac3a3"]
     const context = useContext(noteContext);
-    const { notes, getNotes, heading } = context;
+    const { notes, getNotes, heading, addNoteShow } = context;
     useEffect(() => {
         getNotes();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    console.log()
-
 
     return (
         <div className="content-page">

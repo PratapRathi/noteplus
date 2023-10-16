@@ -7,7 +7,7 @@
     width: 260px;
     height: 100%;
     background: #ffffff;
-    transition: all 0.5s linear;
+    transition: left 0.3s linear;
     box-shadow: 0 0px 40px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
 }
@@ -29,6 +29,9 @@
 .side-menu-close {
     display: none;
 }
+.sidebar{
+    left: 0;
+}
 }
 @media (max-width: 1300px){
 .side-menu-close {
@@ -36,6 +39,8 @@
 }
 .sidebar{
     left: -300px;
+    margin-top: 0;
+    margin-left: 0;
 }
 }
 
@@ -98,6 +103,12 @@
     position: relative;
     border-radius: 10px;
 }
+
+.add-note:hover{
+    background-color: #1f1c2f !important;
+    color: #fff ;
+}
+
 .add-note span{
     position: absolute;
     left: 15px;
@@ -141,3 +152,8 @@
     outline: none !important;
     border: none !important;
   }
+
+.show-sidemenu{
+    left: 0;
+    top: 0;
+}

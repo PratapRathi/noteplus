@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState} from "react";
 import noteContext from "./NoteContext";
 
 
@@ -6,10 +6,11 @@ const NoteState = (props) => {
   const host = "http://localhost:5000";
   const [notes, setNotes] = useState([]);
   const [user, setUser] = useState({});
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(true);
   const [heading, setHeading] = useState("Your Saved Notes")
   const [tags, setTags] = useState([])
   const [deletedNote, setDeletedNote] = useState([]);
+  const addNoteShow = useRef(null);
 
 
   //Get User Details
@@ -29,7 +30,6 @@ const NoteState = (props) => {
   // Get All Notes
   const getNotes = async () => {
     // API Call - Backend
-    // setLoader(true);
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
       method: "GET",
       headers: {
@@ -37,7 +37,7 @@ const NoteState = (props) => {
       }
     })
     const json = await response.json();
-    // setLoader(false);
+    setLoader(false);
     setHeading("Your Saved Notes");
     setNotes(json);
     setTags(json);
@@ -172,7 +172,7 @@ const NoteState = (props) => {
   return (
     <noteContext.Provider value={{
       notes, loader, setLoader, getNotes, getBinNotes, getUser, user, heading, tags, getTagNote,
-      deletedNote, deleteNote, restoreNote, finalDelete, addNote, alert
+      deletedNote, deleteNote, restoreNote, finalDelete, addNote, alert, addNoteShow
     }}>
       {props.children}
     </noteContext.Provider>

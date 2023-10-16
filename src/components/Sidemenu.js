@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect} from 'react'
 import '../css-component/Sidemenu.css'
 import noteContext from '../context/notes/NoteContext';
 import Offcanvas from './Offcanvas';
 import { Link } from "react-router-dom";
 
-const Sidemenu = () => {
+const Sidemenu = (props) => {
   const context = useContext(noteContext)
-  const { tags, getNotes, getBinNotes, user, getUser, getTagNote } = context;
-  const ref = useRef();
+  const { tags, getNotes, getBinNotes, user, getUser, getTagNote, addNoteShow } = context;
+  const showSidemenu = props.showSidemenu;
 
   useEffect(() => {
     getUser();
@@ -16,11 +16,11 @@ const Sidemenu = () => {
 
   function sideMenuClose(e) {
     e.preventDefault();
-    ref.current.style.left = "-300px"
+    showSidemenu.current.style.left = "-300px"
   }
 
   return (
-    <div className='sidebar' id='sidebar' ref={ref}>
+    <div className='sidebar' id='sidebar' ref={showSidemenu}>
       <div className="sidebar-logo d-flex justify-content-between">
         <a href="/" className='d-flex align-items-center justify-content-start text-decoration-none text-dark'>
           <img src={require("../img/logo.png")} alt="Logo" />
@@ -57,7 +57,7 @@ const Sidemenu = () => {
           <input type="text" placeholder="Search" className="search-input input-text" />
         </form>
       </div>
-      <div className="btn add-note mb-3 pr-5">
+      <div className="btn add-note mb-3 pr-5" onClick={()=>{addNoteShow.current.classList.add("show") }}>
         <span className="btn-title">
           <i className="fa-solid fa-plus me-3" style={{ color: "#ffffff" }}></i>
           Add New

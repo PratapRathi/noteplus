@@ -1,0 +1,36 @@
+.navbar{
+    background-color: #fff;
+    --bs-bg-opacity: 0 !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 65px;
+
+}
+
+@media (min-width: 1300px){
+    .navbar {
+        display: none;
+    }
+}
+
+
+
+.navbar .container-fluid{
+    background-color: #fff;
+    height: 100%;
+    justify-content: flex-start;
+}
+
+.navbar-brand{
+    height: 60px;
+}
+
+.navbar-brand img{
+    height: 100%;
+}
+
+.navbar-icon{
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
