@@ -3,15 +3,44 @@ import noteContext from "./NoteContext";
 
 
 const NoteState = (props) => {
+  const token = localStorage.getItem('token');
   const host = "http://localhost:5000";
   const [notes, setNotes] = useState([]);
   const [user, setUser] = useState({});
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [heading, setHeading] = useState("Your Saved Notes")
   const [tags, setTags] = useState([])
   const [deletedNote, setDeletedNote] = useState([]);
   const addNoteShow = useRef(null);
 
+
+  // Create User - Signup
+  const createUser = async (name, email, password, gender) => {
+    // API call - Backend
+    const response = await fetch(`${host}/api/auth/createuser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ name, email, password, gender })
+    })
+    const json = await response.json();
+    return json;
+  }
+
+  // Login User - Login
+  const loginUser = async (email, password) => {
+    // API call - Backend
+    const response = await fetch(`${host}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password})
+    })
+    const json = await response.json();
+    return json;
+  }
 
   //Get User Details
   const getUser = async () => {
@@ -19,21 +48,23 @@ const NoteState = (props) => {
     const response = await fetch(`${host}/api/auth/getuser`, {
       method: "GET",
       headers: {
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+        "auth-token": token
       }
     })
     const json = await response.json();
     setUser(json);
+    return json;
   }
 
 
   // Get All Notes
   const getNotes = async () => {
+    setLoader(true);
     // API Call - Backend
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
       method: "GET",
       headers: {
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+        "auth-token": token
       }
     })
     const json = await response.json();
@@ -49,7 +80,7 @@ const NoteState = (props) => {
     const response = await fetch(`${host}/api/notes/getdeletednotes`, {
       method: "GET",
       headers: {
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+        "auth-token": token
       }
     })
     const json = await response.json();
@@ -65,7 +96,7 @@ const NoteState = (props) => {
     const response = await fetch(`${host}/api/notes/gettagnote/${tag}`, {
       method: "GET",
       headers: {
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+        "auth-token": token
       }
     })
     const json = await response.json();
@@ -79,7 +110,7 @@ const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+        "auth-token": token
       },
       body: JSON.stringify({ title, description, tag })
     })
@@ -93,6 +124,34 @@ const NoteState = (props) => {
     
   }
 
+  // Edit an existing Note 
+  const editNote = async (title, description, tag, id) => {
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": token
+      },
+      body: JSON.stringify({ title, description, tag })
+    })
+    // Showing of Alert
+    const json = await response.json();
+    if(json.success){showAlert("Note Updated Successfully !", "success")}
+    else{showAlert("Failed to Update the Note!", "danger")}
+
+    // Update Note on client side 
+    let newNote = JSON.parse(JSON.stringify(notes));
+    for(let index=0; index < newNote.length; index++){
+      if(newNote[index]._id === id) {
+        newNote[index].title = title;
+        newNote[index].description = description;
+        newNote[index].tag = tag;
+        break;
+      }
+    }
+    setNotes(newNote);
+    setTags(newNote);
+  }
 
 
   // Delete a Note 
@@ -101,7 +160,7 @@ const NoteState = (props) => {
     const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
       method: "DELETE",
       headers: {
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+        "auth-token": token
       }
     })
     // Showing of Alert
@@ -121,7 +180,7 @@ const NoteState = (props) => {
     const response = await fetch(`${host}/api/notes/restorenote/${id}`, {
       method: "POST",
       headers: {
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+        "auth-token": token
       }
     })
     // Showing of Alert
@@ -141,7 +200,7 @@ const NoteState = (props) => {
     const response = await fetch(`${host}/api/notes/permanentdeletenote/${id}`, {
       method: "DELETE",
       headers: {
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjhlZDIxOWU4OWIyYjY4MjkwNDUxZCIsImlhdCI6MTY5NzE4NjU4OH0.nI6XRPxVzAFEN1TDLyk2gsP8IsgbbaKEHThswSQ6QPA"
+        "auth-token": token
       }
     })
     // Showing of Alert
@@ -165,14 +224,14 @@ const NoteState = (props) => {
     })
     setTimeout(() => {
       setAlert(null);
-    }, 1500);
+    }, 1800);
   }
-
+ 
 
   return (
     <noteContext.Provider value={{
-      notes, loader, setLoader, getNotes, getBinNotes, getUser, user, heading, tags, getTagNote,
-      deletedNote, deleteNote, restoreNote, finalDelete, addNote, alert, addNoteShow
+      notes, loader, setLoader, getNotes, getBinNotes, getUser, user, heading, tags, getTagNote, showAlert,
+      deletedNote, deleteNote, restoreNote, finalDelete, addNote, alert, addNoteShow, editNote, createUser, loginUser
     }}>
       {props.children}
     </noteContext.Provider>

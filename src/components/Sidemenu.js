@@ -1,18 +1,38 @@
-import React, { useContext, useEffect} from 'react'
+import React, { useContext, useEffect } from 'react'
 import '../css-component/Sidemenu.css'
 import noteContext from '../context/notes/NoteContext';
 import Offcanvas from './Offcanvas';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidemenu = (props) => {
+  const navigate = useNavigate();
   const context = useContext(noteContext)
   const { tags, getNotes, getBinNotes, user, getUser, getTagNote, addNoteShow } = context;
   const showSidemenu = props.showSidemenu;
 
+  const verifyUser = async () => {
+    const result = await getUser();
+    if (result === null || result.success === false || result.error === "Please authenticate using a valid token") {
+      navigate('/login');
+    }
+  }
+
   useEffect(() => {
-    getUser();
+    if (localStorage.getItem('token')) {
+      getUser();
+      verifyUser();
+    }
+    else {
+      navigate('/login');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    navigate("/login");
+  }
 
   function sideMenuClose(e) {
     e.preventDefault();
@@ -35,19 +55,19 @@ const Sidemenu = (props) => {
         <img src={require(`../img/${user.gender ? user.gender : "male"}.jpg`)} alt="avatar" className=".me-3" />
         <h6 style={{ color: "#1f1c2f" }}>{user.name}</h6>
         <div className="dropdown-menu">
-          <a href="/" className="dropdown-item mb-2 text-decoration-none">
+          <Link to="/" className="dropdown-item mb-2 text-decoration-none">
             <i className="fa-solid fa-user me-3"></i>
             <span>My Profile</span>
-          </a>
-          <a href="/" className="dropdown-item mb-2 text-decoration-none">
+          </Link>
+          <Link to="/" className="dropdown-item mb-2 text-decoration-none">
             <i className="fa-solid fa-user-pen me-2"></i>
             <span>Edit Profile</span>
-          </a>
+          </Link>
           <hr className="my-2" />
-          <a href="/" className="dropdown-item mb-1 text-decoration-none">
+          <div href="/" className="dropdown-item mb-1 text-decoration-none" onClick={handleLogout}>
             <i className="fa-solid fa-right-to-bracket me-3"></i>
             <span>Logout</span>
-          </a>
+          </div>
         </div>
       </div>
       {/* {Scrollabe Item} */}
@@ -57,7 +77,7 @@ const Sidemenu = (props) => {
           <input type="text" placeholder="Search" className="search-input input-text" />
         </form>
       </div>
-      <div className="btn add-note mb-3 pr-5" onClick={()=>{addNoteShow.current.classList.add("show") }}>
+      <div className="btn add-note mb-3 pr-5" onClick={() => { addNoteShow.current.classList.add("show") }}>
         <span className="btn-title">
           <i className="fa-solid fa-plus me-3" style={{ color: "#ffffff" }}></i>
           Add New

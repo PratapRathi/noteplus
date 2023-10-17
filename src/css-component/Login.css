@@ -1,0 +1,72 @@
+.login-content{
+    position: relative;
+    height: 100vh;
+    z-index: 99;
+    color: #768492;
+}
+.height-self-center {
+    height: 100vh;
+    border-radius: 10px;
+}
+.sign-user_card{
+    box-shadow: 0 0px 40px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.login-content .sign-user_card .logo-detail {
+    margin: 0 auto 20px;
+    text-align: center;
+    display: inline-block;
+}
+
+.login-content h4{
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    margin: 0px;
+    line-height: 1;
+    color: #131313;
+    font-size: 1.44em;
+}
+
+.login-content h3{
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    margin: 0px;
+    line-height: 1.5;
+    color: #131313;
+    font-size: 1.728em;
+}
+
+.floating-label {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    height: 45px;
+    line-height: 30px;
+    background: #f3f6fd;
+    border: 1px solid #DCDDDF;
+    font-size: 14px;
+    color: #768492;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.login-content a {
+    color: #1f1c2f !important;
+    text-decoration: none;
+    background-color: transparent;
+    font-weight: 400;
+}
+
+.login-content .btn{
+    border-radius: 10px;
+}
+
+.login-logo{
+    max-height: 50px;
+}

@@ -1,25 +1,22 @@
 import './App.css';
-import Alert from './components/Alert';
-import ContentPage from './components/ContentPage';
-import Loader from './components/Loader';
-import Sidemenu from './components/Sidemenu';
-import Navbar from './components/Navbar'
 import NoteState from './context/notes/NoteState';
-import { BrowserRouter as Router } from "react-router-dom";
-import { useRef } from 'react';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Login from './components/Login';
+import Alert from './components/Alert'
+import HomePage from './HomePage';
+import SignUp from './components/SignUp';
 
 function App() {
-  const showSidemenu = useRef(null);
-
   return (
     <>
       <NoteState>
         <Router>
-          <Loader />
           <Alert />
-          <Navbar showSidemenu={showSidemenu}/>
-          <Sidemenu showSidemenu={showSidemenu}/>
-          <ContentPage />
+          <Routes>
+            <Route path='*' element={<HomePage />} />
+            <Route exact path='/login' element={<Login />} />
+            <Route exact path='/signup' element={<SignUp />} />
+          </Routes>
         </Router>
       </NoteState>
     </>

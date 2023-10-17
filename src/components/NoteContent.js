@@ -10,7 +10,7 @@ const NoteContent = (props) => {
     const context = useContext(noteContext);
     const { deleteNote, restoreNote, finalDelete } = context;
 
-    const { note, color } = props;
+    const { note, color, updateNote } = props;
     const date = new Date(note.date);
     const hours = date.getHours();
     const minutes = date.getMinutes();
@@ -52,7 +52,7 @@ const NoteContent = (props) => {
                         <i className="fa-solid fa-ellipsis fa-lg" data-bs-toggle="dropdown" ref={dropRef}></i>
                         <div className="dropdown-menu card-menu">
                             <Routes>
-                                <Route exact path="/" element={<SavedDropdown deleteNote={deleteNote} note={note} />} />
+                                <Route exact path="/" element={<SavedDropdown updateNote={updateNote} deleteNote={deleteNote} note={note} color={color} />} />
                                 <Route exact path="/bin" element={<BinDropdown restoreNote={restoreNote} finalDelete={finalDelete} note={note} />} />
                             </Routes>
                         </div>

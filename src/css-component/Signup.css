@@ -1,0 +1,57 @@
+.signup-logo{
+    max-height: 50px;
+}
+
+#gender{
+    border-radius: 10px;
+}
+
+.checkBoxRound {
+    position: relative;
+  }
+
+  .checkBoxRound label {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .checkBoxRound label:after {
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 6px;
+    position: absolute;
+    top: 7px;
+    left: 6px;
+    opacity: 0;
+    transform: rotate(-45deg);
+    width: 12px;
+  }
+  
+  .checkBoxRound input[type="checkbox"] {
+    position: absolute;
+    top: 5px;
+    left: 1%;
+  }
+  
+  .checkBoxRound input[type="checkbox"]:checked + label {
+    background-color: black;
+    border-color: #66bb6a;
+  }
+  
+  .checkBoxRound input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }
+  
+  .checkBoxRound span{
+    float: left;
+  }
