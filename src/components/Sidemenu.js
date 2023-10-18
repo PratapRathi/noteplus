@@ -54,7 +54,7 @@ const Sidemenu = (props) => {
       </div>
       {/* {Personal Dropdown Menu} */}
       <div className="sidebar-dropdown dropdown-toggle dropdown d-flex align-items-center justify-content-between" data-bs-toggle="dropdown">
-        <img src={require(`../img/${user.gender ? user.gender : "male"}.jpg`)} alt="avatar" className=".me-3" />
+        <img src={require(`../img/${user.gender ? user.gender : "Male"}.jpg`)} alt="avatar" className=".me-3" />
         <h6 style={{ color: "#1f1c2f" }}>{user.name}</h6>
         <div className="dropdown-menu">
           <Link to="/" className="dropdown-item mb-2 text-decoration-none">
@@ -72,14 +72,9 @@ const Sidemenu = (props) => {
           </div>
         </div>
       </div>
+
       {/* {Scrollabe Item} */}
-      <div className="search-bar mb-3">
-        <form action="#" className="search-box">
-          <i className="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" placeholder="Search" className="search-input input-text" />
-        </form>
-      </div>
-      <div className="btn add-note mb-3 pr-5" onClick={() => { addNoteShow.current.classList.add("show") }}>
+      <div className="btn add-note mt-2 mb-2 pr-5" onClick={() => { addNoteShow.current.classList.add("show") }}>
         <span className="btn-title">
           <i className="fa-solid fa-plus me-3" style={{ color: "#ffffff" }}></i>
           Add New

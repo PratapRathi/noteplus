@@ -29,9 +29,9 @@ const Offcanvas = (props) => {
                         <ul>
                             {tagArr.map((e, index) => {
                                 return (<div key={index}>
-                                    <li className="offcanvas-li my-3 d-flex align-item-center justify-content-start" onClick={(e)=>{tagClick(e)}}>
+                                    <li className="offcanvas-li my-3 d-flex align-item-center justify-content-start" >
                                         <div className="me-4 offcanvas-index" style={{ borderColor: `${colors[index%6]}` }} >{index + 1}</div>
-                                        <h5>{e}</h5>
+                                        <h5 onClick={(e)=>{tagClick(e)}}>{e}</h5>
                                     </li>
                                     <hr />
                                 </div>)

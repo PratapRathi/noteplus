@@ -21,7 +21,6 @@ const ContentPage = () => {
     const updateNote = (note, cardColor) => { // This updateNote function passed to NoteContent's dropdown as Props
         editModalRef.current.click();
         setEditBtnColor(cardColor);
-        console.log(editBtnColor);
         setEditNoteState({ ...editNoteState, title: note.title, description: note.description, tag: note.tag, id: note._id })
     }
     const onEditChange = (e) => {
@@ -130,7 +129,7 @@ const ContentPage = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" ref={editModalClose} className="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn edit-btn" style={{backgroundColor: editBtnColor}} onClick={onUpdateClick}>Update</button>
+                            <button type="button" className="btn edit-btn" style={{backgroundColor: editBtnColor, color:"#fff"}} onClick={onUpdateClick}>Update</button>
                         </div>
                     </div>
                 </div>
