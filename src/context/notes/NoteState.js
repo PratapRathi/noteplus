@@ -36,7 +36,8 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password})
+      body: JSON.stringify({ email, password}),
+      withCredentials: true
     })
     const json = await response.json();
     return json;
@@ -48,7 +49,7 @@ const NoteState = (props) => {
     const response = await fetch(`${host}/api/auth/getuser`, {
       method: "GET",
       headers: {
-        "auth-token": token
+        "auth-token": token 
       }
     })
     const json = await response.json();

@@ -81,7 +81,7 @@ const ContentPage = () => {
                                 </div>
                                 <div className="row note-content">
                                     {notes.length === 0 && <div className="container mx-1"><h6>No Notes to be available for display</h6></div>}
-                                    {notes.map((note, index) => {
+                                    {Array.isArray(notes) && notes.map((note, index) => {
                                         return <NoteContent key={index} updateNote={updateNote} note={note} color={colors[index % 6]} />
                                     })}
                                 </div>

@@ -3,9 +3,11 @@ import '../css-component/Offcanvas.css'
 
 const Offcanvas = (props) => {
     let tag = new Set();
-    props.tags.forEach((e) => {
-        tag.add(e.tag);
-    })
+    if(Array.isArray(props.tags)){
+        props.tags.forEach((e) => {
+            tag.add(e.tag);
+        })
+    }
     const tagArr = Array.from(tag);
     const colors = ["#87baf5", "#aa87f5", "#f0864a", "#f674ad", "#302c48", "#8ac3a3"]
 

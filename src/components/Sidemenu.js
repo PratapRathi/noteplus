@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Sidemenu = (props) => {
   const navigate = useNavigate();
   const context = useContext(noteContext)
-  const { tags, getNotes, getBinNotes, user, getUser, getTagNote, addNoteShow } = context;
+  const { tags, getNotes, getBinNotes, user, getUser, getTagNote, addNoteShow, showAlert } = context;
   const showSidemenu = props.showSidemenu;
 
   const verifyUser = async () => {
@@ -18,6 +18,7 @@ const Sidemenu = (props) => {
   }
 
   useEffect(() => {
+
     if (localStorage.getItem('token')) {
       getUser();
       verifyUser();
@@ -32,6 +33,7 @@ const Sidemenu = (props) => {
     e.preventDefault();
     localStorage.removeItem('token');
     navigate("/login");
+    showAlert("Logged Out Successfully !", "success");
   }
 
   function sideMenuClose(e) {
