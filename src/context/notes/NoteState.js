@@ -4,7 +4,7 @@ import noteContext from "./NoteContext";
 
 const NoteState = (props) => {
   const token = localStorage.getItem('token');
-  const host = "http://localhost:5000";
+  const host = process.env.REACT_APP_BASE_URL;
   const [notes, setNotes] = useState([]);
   const [user, setUser] = useState({});
   const [loader, setLoader] = useState(false);
@@ -231,7 +231,7 @@ const NoteState = (props) => {
 
   return (
     <noteContext.Provider value={{
-      notes, loader, setLoader, getNotes, getBinNotes, getUser, user, heading, tags, getTagNote, showAlert,
+      notes, loader, getNotes, getBinNotes, getUser, user, heading, tags, getTagNote, showAlert,
       deletedNote, deleteNote, restoreNote, finalDelete, addNote, alert, addNoteShow, editNote, createUser, loginUser
     }}>
       {props.children}
