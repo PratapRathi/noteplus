@@ -3,6 +3,7 @@ import "../css-component/ContentPage.css"
 import NoteContent from './NoteContent'
 import noteContext from '../context/notes/NoteContext'
 import AddNoteModal from './AddNoteModal'
+import { Link } from 'react-router-dom'
 
 const ContentPage = () => {
     const colors = ["#87baf5", "#aa87f5", "#f0864a", "#f674ad", "#302c48", "#8ac3a3"]
@@ -72,9 +73,9 @@ const ContentPage = () => {
                                 <h3 className='mb-3'>{heading}</h3>
                                 <div className="p-2 body-bg mb-4">
                                     <form className="add-notes input-text">
-                                        <a className="search-link" href="/">
+                                        <Link className="search-link" to="/">
                                             <i className="fa-solid fa-magnifying-glass"></i>
-                                        </a>
+                                        </Link>
                                         <input type="text" className="text search-content input-text" placeholder="Search Notes" />
                                     </form>
                                 </div>
