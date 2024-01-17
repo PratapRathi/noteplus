@@ -57,15 +57,6 @@ const Sidemenu = (props) => {
         <img src={require(`../img/${user.gender ? user.gender : "Male"}.jpg`)} alt="avatar" className=".me-3" />
         <h6 style={{ color: "#1f1c2f" }}>{user.name}</h6>
         <div className="dropdown-menu">
-          <Link to="/" className="dropdown-item mb-2 text-decoration-none">
-            <i className="fa-solid fa-user me-3"></i>
-            <span>My Profile</span>
-          </Link>
-          <Link to="/" className="dropdown-item mb-2 text-decoration-none">
-            <i className="fa-solid fa-user-pen me-2"></i>
-            <span>Edit Profile</span>
-          </Link>
-          <hr className="my-2" />
           <div href="/" className="dropdown-item mb-1 text-decoration-none" onClick={handleLogout}>
             <i className="fa-solid fa-right-to-bracket me-3"></i>
             <span>Logout</span>
@@ -91,14 +82,6 @@ const Sidemenu = (props) => {
               </i>
               <span >Your Notes</span>
             </Link>
-          </li>
-          <li className="sidebar-li my-4">
-            <i>
-              <svg width="20" className="svg-icon me-3" id="iq-main-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" style={{ "strokeDasharray": "65, 85", "strokeDashoffset": "0" }}></path>
-              </svg>
-            </i>
-            <span>Reminder</span>
           </li>
           <li className="sidebar-li my-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
             <i>

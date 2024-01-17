@@ -18,8 +18,8 @@ const NoteContent = (props) => {
     const month = date.toLocaleString('default', { month: 'short' })
     const year = date.getFullYear();
 
-    const ref = useRef(); const timeRef = useRef(); const dateRef = useRef(); const calenderRef = useRef(); const clockRef = useRef();
-    const titleRef = useRef(); const paraRef = useRef(); const logoRef = useRef(); const headerRef = useRef(); const dropRef = useRef();
+    const ref = useRef(), timeRef = useRef(), dateRef = useRef(), calenderRef = useRef(), clockRef = useRef();
+    const titleRef = useRef(), paraRef = useRef(), logoRef = useRef(), headerRef = useRef(), dropRef = useRef();
     const enter = [timeRef, clockRef, calenderRef, titleRef, paraRef, logoRef, dropRef, dateRef];
     const leave = [timeRef, clockRef, calenderRef, logoRef];
     const mouseEnter = () => {

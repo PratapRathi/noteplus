@@ -76,7 +76,7 @@ const ContentPage = () => {
                                         <Link className="search-link" to="/">
                                             <i className="fa-solid fa-magnifying-glass"></i>
                                         </Link>
-                                        <input type="text" className="text search-content input-text" placeholder="Search Notes" />
+                                        <input type="text" className="text search-content input-text" placeholder="Search Notes - (Search Facility will be implemented soon)" />
                                     </form>
                                 </div>
                                 <div className="row note-content">
